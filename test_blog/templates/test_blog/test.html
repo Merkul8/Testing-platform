@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="row">
+    <div class="col-6 offset-3 test-block" >
+        {% for question in questions %}
+        <h3 class="title-question">{{ question.title }}</h3>
+        {% for answer in answers %}
+        {% if answer.question_id == question.pk %}
+        <div class="row answer">
+            <div class="col-12">
+                <input type="checkbox" id="answer_{{ answer.pk }}">
+                <label for="answer_{{ answer.pk }}">{{ answer.title }}</label>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block pagination %}
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="pagination">
+            <span class="step-links">
+                {% if questions.has_previous %}
+                <a href="?page={{ questions.previous_page_number }}">предыдущий</a>
+                {% endif %}
+
+                <span class="current-page">
+                    Вопрос {{ questions.number }} из {{ questions.paginator.num_pages }}.
+                </span>
+
+                {% if questions.has_next %}
+                <a href="?page={{ questions.next_page_number }}">следующий</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+{% endblock %}

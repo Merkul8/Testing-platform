@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="container py-5">
+    <div class="row">
+        {% for test in tests %}
+        <div class="col-12 col-md-4 px-0 py-0">
+            <a class='test-link' href="{{ test.get_absolute_url }}">
+                <div>
+                    <img src="{{ test.photo.url }}" alt="Математика">
+                    <h3>{{ test.title }}</h3>
+                </div>
+            </a>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+{% block pagination %}
+{% endblock %}
